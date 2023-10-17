@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'FLO',
-  description: 'Create your own workFLO.',
+  description: 'Create your own FLO',
 }
 
 export default function RootLayout({
