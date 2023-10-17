@@ -8,6 +8,7 @@ import { SignInButton, UserButton} from '@clerk/clerk-react';
 import { Spinner } from '../../../components/spinner';
 import { Button } from '../../../components/ui/button';
 import Link from 'next/link';
+import { Plus } from 'lucide-react';
 
 const Navbar = () => {
     const { isAuthenticated, isLoading } = useConvexAuth();
@@ -18,7 +19,7 @@ const Navbar = () => {
         scrolled && "border-b shadow-sm"
     )}>
         <Logo />
-        <div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x2">
+        <div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-2">
             {isLoading && (
                <Spinner />
             )}
@@ -32,7 +33,7 @@ const Navbar = () => {
                         </SignInButton>
                         <SignInButton mode="modal">
                             <Button size="sm">
-                                Get Sotion free
+                            Start to create FLO
                             </Button>
                         </SignInButton>
                     </>
@@ -42,7 +43,8 @@ const Navbar = () => {
                 <>
                     <Button variant="ghost" size="sm">
                         <Link href="/documents">
-                            Enter Sotion 
+                            New FLO
+                            
                         </Link>
                         </Button>
                         <UserButton 

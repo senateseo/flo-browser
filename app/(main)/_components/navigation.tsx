@@ -149,11 +149,11 @@ export const Navigation = () => {
           <UserItem />
           <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
           <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
-          <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
+          <Item onClick={handleCreate} label="New FLO" icon={PlusCircle} />
         </div>
         <div className="mt-4">
             <DocumentList />
-            <Item onClick={handleCreate} label="Add a page" icon={Plus} />
+            <Item onClick={handleCreate} label="Add a FLO" icon={Plus} />
             <Popover>
                 <PopoverTrigger className="w-full mt-4">
                     <Item label="Trash" icon={Trash} />

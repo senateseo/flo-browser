@@ -10,8 +10,8 @@ import { EdgeStoreProvider } from '../lib/edgestore';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Sotion',
-  description: 'Beyond the note',
+  title: 'FLO',
+  description: 'Create your own workFLO.',
 }
 
 export default function RootLayout({
