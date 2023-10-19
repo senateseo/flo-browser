@@ -12,7 +12,7 @@ export const Heading = () => {
 
   return (
     <div className="max-w-3xl space-y-8">
-      <h1 className="text-2xl sm:text-5xl md:text-6xl font-semibold">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold">
         Search or Make <br />
         your own &nbsp;
         <span className="relative whitespace-nowrap text-black dark:text-white">
@@ -38,29 +38,30 @@ export const Heading = () => {
         </div>
       )}
       {isAuthenticated && !isLoading && (
-        <div className="space-x-4">
-        <Button asChild>
-          <Link href="/explore">
-          Explore FLOs
-            <Search className="h-4 w-4 ml-2" />
-          </Link>
-        </Button>
-         <Button asChild>
-         <Link href="/documents">
-           Start to create FLO
-           <ArrowRight className="h-4 w-4 ml-2" />
-         </Link>
-       </Button>
-       </div>
+        <div className="grid grid-cols-1 sm:flex sm:flex-row items-center justify-center space-y-4 sm:space-x-4 sm:space-y-0 px-10">
+          <Button asChild>
+            <Link href="/explore">
+              Explore FLOs
+              <Search className="h-4 w-4 sm: ml-2" />
+            </Link>
+          </Button>
+
+          <Button asChild>
+            <Link href="/documents">
+              Start to create FLO
+              <ArrowRight className="h-4 w-4 ml-2 " />
+            </Link>
+          </Button>
+        </div>
       )}
       {!isAuthenticated && !isLoading && (
-        <div className="space-x-4">
+        <div className="grid grid-cols-1 sm:flex sm:flex-row items-center justify-center space-y-4 sm:space-x-4 sm:space-y-0 px-10">
+            <Button asChild>
           <Link href="/explore">
-          <Button >
-            Explore FLOs
-            <Search className="h-4 w-4 ml-2" />
-          </Button>
+              Explore FLOs
+              <Search className="h-4 w-4 ml-2" />
           </Link>
+            </Button>
           <SignInButton mode="modal">
             <Button>
               Start to create FLO
