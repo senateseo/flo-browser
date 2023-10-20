@@ -12,7 +12,11 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { SignOutButton, useUser } from "@clerk/clerk-react";
 
-const UserItem = () => {
+interface UserItemProps {
+    admin?: boolean;
+}
+
+const UserItem = ({admin} : UserItemProps) => {
     const { user } = useUser();
 
     return (
@@ -24,7 +28,7 @@ const UserItem = () => {
                             <AvatarImage src={user?.imageUrl} />
                         </Avatar>
                         <span className="text-start font-medium line-clamp-1">
-                            {user?.fullName}&apos;s FLO
+                            {user?.fullName}{admin ? `'s Admin` : `'s FLO`}
                         </span>
                     </div>
                     <ChevronsLeftRight className="rotate-90 ml-2 text-muted-foreground h-4 w-4" />

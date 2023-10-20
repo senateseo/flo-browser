@@ -1,5 +1,4 @@
 import { ExlporeSearchCommand } from "../../components/explore-search-command";
-import { SearchCommand } from "../../components/search-command";
 import Navbar from "./_components/navbar";
 
 const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
