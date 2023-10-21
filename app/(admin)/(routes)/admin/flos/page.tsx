@@ -2,52 +2,39 @@
 import { ChevronRight, HomeIcon, Settings, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import moment from "moment";
+import { useQuery } from "convex/react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/spinner";
+import { api } from "@/convex/_generated/api";
+import moment from "moment";
 
-const USER_API_URL = "/api/users";
+export default function FlosPage(){
+  
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const flos = useQuery(api.documents.getAdminSearch, {
+    keyword: searchKeyword
+});
 
-export default function UsersPage() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchKeyword, setSearchKeyword] = useState("");
-  const [users, setUsers] = useState([]);
-
-  const getUsers = async () => {
-    try {
-      setIsLoading(true);
-      const res = await fetch(`${USER_API_URL}?q=${searchKeyword}`);
-      const data = await res.json();
-
-      setUsers(data);
-      setIsLoading(false);
-    } catch (e) {
-      console.log(e);
-      // TODO: Error Toast box
-      setIsLoading(false);
-    }
-  };
 
   const onChangeSearchKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
   };
 
   const onClickSearch = () => {
-    getUsers();
+    // TODO
   };
 
   const renderTable = () => {
 
-    if(isLoading){
+    if(flos === undefined){
       return (
         <div className="flex justify-center items-center">
         <Spinner />
       </div>
       )
-    }else if(users.length===0){
+    }else if(flos != undefined && flos?.length===0 ){
       return (
       <div className="flex justify-center items-center py-10 text-muted-foreground">
         <span>No Results Found</span>
@@ -63,61 +50,47 @@ export default function UsersPage() {
                 scope="col"
                 className="min-w-[4rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
               >
-                Profile
+                Title
               </th>
               <th
                 scope="col"
-                className="min-w-[6rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
+                className="min-w-[4rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
               >
-                First Name
+                User
               </th>
               <th
                 scope="col"
-                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                className=" py-3.5 text-left text-sm font-semibold text-gray-900"
               >
-                Email
+                Published
               </th>
               <th
                 scope="col"
-                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                className=" py-3.5 text-left text-sm font-semibold text-gray-900"
               >
-                Last Login
+                Created
               </th>
               <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
                 <span className="sr-only">Edit</span>
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 ">
-            {users?.map((user) => (
-              <tr key={user.id}>
+          <tbody className="divide-y divide-gray-200 space-y-8 ">
+          {flos?.map((flo) => (
+              <tr key={flo._id} >
                 <td className="relative px-7 sm:w-12 sm:px-6"></td>
-                <td>
-                  <Image
-                    src={user.imageUrl}
-                    className="rounded-full"
-                    width={20}
-                    height={20}
-                    alt="profileImage"
-                  />
+               
+                <td className="whitespace-nowrap  py-4 text-sm text-gray-500">
+                  {flo.title}
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {user.firstName}
+                <td className="whitespace-nowrap  py-4 text-sm text-gray-500">
+                  <span className="text-ellipsis">{flo.userId}</span>
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {user.emailAddresses[0].emailAddress}
+                <td className="whitespace-nowrap py-4 text-sm text-gray-500">
+                  {flo.isPublished ? "Yes" : "No"}
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {moment(user.lastSignInAt).format("yyyy-MM-DD hh:mm:ss")}
-                </td>
-                <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-indigo-900"
-                  >
-                    Edit
-                    <span className="sr-only">, {user.firstName}</span>
-                  </a>
+                <td className="whitespace-nowrap py-4 text-sm text-gray-500">
+                  {moment(flo._creationTime).format("yyyy-MM-DD hh:mm:ss")}
                 </td>
               </tr>
             ))}
@@ -126,12 +99,6 @@ export default function UsersPage() {
     )
     }
   }
-
-  useEffect(() => {
-    if (searchKeyword === "") {
-      getUsers();
-    }
-  }, [searchKeyword]);
 
   return (
     <div className="flex flex-col space-y-8 p-4">
@@ -143,18 +110,18 @@ export default function UsersPage() {
               <span className="text-muted-foreground font-bold">Home</span>
             </Link>
             <ChevronRight className="text-muted-foreground" />
-            <span className="font-bold">Users</span>
+            <span className="font-bold">Flos</span>
           </div>
 
           <div className="sm:flex-auto">
             <h1 className="text-2xl font-bold leading-6 text-gray-900">
-              Users
+              Flos
             </h1>
           </div>
 
           <div className="flex space-x-4">
             <Input
-              placeholder="Search for users"
+              placeholder="Search for flos"
               className="w-60"
               onChange={onChangeSearchKeyword}
             />

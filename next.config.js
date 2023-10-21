@@ -3,7 +3,8 @@ const nextConfig = {
     images: {
         domains: [
             "files.edgestore.dev",
-            "www.dpreview.com"
+            "www.dpreview.com",
+            'img.clerk.com'
         ]
     }
 }

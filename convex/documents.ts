@@ -247,6 +247,28 @@ export const getSearch = query({
   },
 });
 
+export const getAdminSearch = query({
+  args: {
+    keyword: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+
+    // TODO: Check Admin
+
+    const documents = await ctx.db
+      .query("documents")
+      .withSearchIndex("search_title", (q) => q.search("title", args.keyword))
+      .collect();
+
+    return documents;
+  },
+});
+
 export const getById = query({
   args: { documentId: v.id("documents") },
   handler: async (ctx, args) => {
