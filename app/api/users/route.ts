@@ -20,7 +20,7 @@ export async function DELETE(request: Request) {
     });
 }
 
-const getUsers = async (query: string | null) => {
+const getUsers = async (query: any) => {
   try {
     const res = await clerkClient.users.getUserList({
       query
