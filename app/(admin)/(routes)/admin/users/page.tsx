@@ -11,6 +11,14 @@ import { Spinner } from "@/components/spinner";
 
 const USER_API_URL = "/api/users";
 
+interface User {
+  id: any;
+  imageUrl: any;
+  firstName: any;
+  lastSignInAt: any;
+  emailAddresses:any;
+}
+
 export default function UsersPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -89,7 +97,7 @@ export default function UsersPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 ">
-            {users?.map((user) => (
+            {users?.map((user: User) => (
               <tr key={user.id}>
                 <td className="relative px-7 sm:w-12 sm:px-6"></td>
                 <td>
