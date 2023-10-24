@@ -15,6 +15,7 @@ import {
   createReactBlockSpec,
   useBlockNote,
   ReactSlashMenuItem,
+  Theme
 } from "@blocknote/react";
 import "@blocknote/core/style.css";
 import { AlertTriangle, ArrowRight, Lightbulb, Workflow } from "lucide-react";
@@ -164,6 +165,11 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
   };
 
   const editor: BlockNoteEditor = useBlockNote({
+    domAttributes: {
+      editor: {
+        class: "!p-5 sm:p-10"
+      }
+    },
     editable,
     blockSchema: customSchema,
     slashMenuItems: [
@@ -181,6 +187,8 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
     uploadFile: handleUpload,
   });
 
+
+
   return (
     <div>
       <BlockNoteView
@@ -190,5 +198,6 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
     </div>
   );
 };
+
 
 export default Editor;

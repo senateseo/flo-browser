@@ -70,8 +70,10 @@ export const Toolbar = ({
         })
     }
 
+    console.log("INITIAL_DATA", initialData);
+
     return (
-        <div className="pl-[54px] group relative">
+        <div className="px-5 sm:px-[54px] group relative">
             {!!initialData.icon && !preview && (
                 <div className="flex items-center gap-x-2 group/icon pt-6">
                     <IconPicker onChange={onIconSelect}>
@@ -105,7 +107,7 @@ export const Toolbar = ({
             {isEditing && !preview ? (
                 <TextareaAutosize ref={inputRef} onBlur={disableInput} onKeyDown={onKeyDown} value={value} onChange={(e) => onInput(e.target.value)} className="text-5xl bg-transparent font-bold break-words outline-none text-[#3F3F3f] dark:text-[#CFCFCF] resize-none"/>
             ) : (
-                <div onClick={enableInput} className="pb-[11.5px] text-5xl font-bold break-words outline-none">
+                <div onClick={enableInput} className="text-3xl pb-[11.5px] sm:text-5xl font-bold break-words outline-none">
                     {initialData.title}
                 </div>
             )}
