@@ -11,6 +11,8 @@ export default defineSchema({
     coverImage: v.optional(v.string()),
     icon: v.optional(v.string()),
     owner: v.optional(v.any()),
+    steps: v.optional(v.number()),
+    wordCounts: v.optional(v.number()),
     isPublished: v.boolean(),
   })
     .index("by_user", ["userId"])

@@ -309,6 +309,30 @@ export const getById = query({
     /* Add Owner Info */
     document.owner = user;
 
+    /* Get Word Counts and steps*/
+    let string = "";
+    let steps = 0;
+    const blockList = JSON.parse(document?.content);
+
+    for (let i = 0; i < blockList.length; i++) {
+      if (blockList[i].content.length) {
+        const contents = blockList[i].content;
+        for (const content of contents) {
+          if (content.text) {
+            string += ` ${content.text}`;
+          }
+        }
+      }
+
+      if (blockList[i].type === "step") {
+        steps += 1;
+      }
+    }
+
+    let words = string.split(/\s+/);
+    document.wordCounts = words.length;
+    document.steps = steps;
+
     if (document.isPublished && !document.isArchived) {
       return document;
     }
