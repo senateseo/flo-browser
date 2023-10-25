@@ -12,7 +12,7 @@ export const archive = mutation({
       throw new Error("Not authenticated");
     }
 
-    const userId = identity.subject;
+    const userId: any = identity.subject;
 
     const existingDocument = await ctx.db.get(args.id);
 
@@ -222,6 +222,15 @@ export const getExploreSearch = query({
       .order("desc")
       .collect();
 
+    for (const document of documents) {
+      const user = await ctx.db
+        .query("users")
+        .filter((q) => q.eq(q.field("clerkId"), document.userId))
+        .take(1);
+
+      /* Add Owner Info */
+      document.owner = user;
+    }
     return documents;
   },
 });
@@ -242,6 +251,16 @@ export const getSearch = query({
       .filter((q) => q.eq(q.field("isArchived"), false))
       .order("desc")
       .collect();
+
+    for (const document of documents) {
+      const user = await ctx.db
+        .query("users")
+        .filter((q) => q.eq(q.field("clerkId"), document.userId))
+        .take(1);
+
+      /* Add Owner Info */
+      document.owner = user;
+    }
 
     return documents;
   },
@@ -274,21 +293,25 @@ export const getById = query({
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
 
+    const userId = identity?.subject;
+
     const document = await ctx.db.get(args.documentId);
 
     if (!document) {
       throw new Error("not found");
     }
 
+    const user = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("clerkId"), document.userId))
+      .take(1);
+
+    /* Add Owner Info */
+    document.owner = user;
+
     if (document.isPublished && !document.isArchived) {
       return document;
     }
-
-    if (!identity) {
-      throw new Error("Not authenticated");
-    }
-
-    const userId = identity.subject;
 
     if (document.userId !== userId) {
       throw new Error("Unauthorized");

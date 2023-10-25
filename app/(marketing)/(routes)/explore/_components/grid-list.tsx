@@ -48,6 +48,9 @@ export const GridList = ({ itemList }: any) => {
               <p className="mt-1 truncate text-sm text-gray-500">
                 {moment(item._creationTime).startOf("day").fromNow()}
               </p>
+              <p className="mt-1 truncate text-sm text-muted-foreground">
+                By {item.owner[0].name}
+              </p>
             </div>
           </div>
           <div>

@@ -32,6 +32,7 @@ const DocumentIdPage = ({
         })
     };
 
+
     if(document === undefined) {
         return (
         <div>
@@ -59,6 +60,9 @@ const DocumentIdPage = ({
             <Cover preview url={document.coverImage}/>
             <div className="md:max-w-3xl lg:max-w-4xl mx-auto" >
                 <Toolbar preview initialData={document} />
+                <div className="px-5 my-4 text-muted-foreground">
+                    {document.owner[0].name} | 4 Steps | 3 minutes
+                </div>
                 <Editor editable={false} onChange={onChange} initialContent={document.content}/>
             </div>
         </div>

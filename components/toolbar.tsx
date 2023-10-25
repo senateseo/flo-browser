@@ -70,8 +70,6 @@ export const Toolbar = ({
         })
     }
 
-    console.log("INITIAL_DATA", initialData);
-
     return (
         <div className="px-5 sm:px-[54px] group relative">
             {!!initialData.icon && !preview && (
