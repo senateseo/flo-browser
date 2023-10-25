@@ -34,7 +34,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
     });
   };
 
-  console.log("DOCUMENT", document);
+//   console.log("DOCUMENT", document);
 
   if (document === undefined) {
     return (
@@ -68,9 +68,9 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
           |<span className="text-muted-foreground">{document.steps} Steps</span>{" "}
           |
           <span className="text-muted-foreground">
-            {document.wordCounts / wpm < 1
-              ? `${Math.round((document.wordCounts / wpm) * 60)} seconds`
-              : `${Math.round(document.wordCounts / wpm)} minutes`}
+            {document.wordCounts ?? 1 / wpm < 1
+              ? `${Math.round((document.wordCounts ?? 1 / wpm) * 60)} seconds`
+              : `${Math.round(document.wordCounts ?? 1 / wpm)} minutes`}
           </span>
         </div>
         <Editor

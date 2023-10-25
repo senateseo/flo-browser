@@ -50,7 +50,7 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
     },
     containsInlineContent: true,
     render: ({ block }) => (
-      <div className="my-4 p-4 rounded-md shadow-lg flex space-x-8">
+      <div className="my-4 p-4 rounded-md shadow-md flex space-x-8">
         <div className="flex-none flex justify-center items-center rounded-full w-10 h-10 bg-gray-200">
           <ArrowRight />
         </div>
@@ -68,7 +68,7 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
     },
     containsInlineContent: true,
     render: ({ block }) => (
-      <div className="my-4 p-4 py-8 rounded-md shadow-lg flex space-x-8 bg-amber-100">
+      <div className="my-4 p-4 py-8 rounded-md shadow-md flex space-x-8 bg-amber-100">
         <div className="flex-none flex justify-center items-center rounded-full w-10 h-10  bg-amber-500 text-white">
           <Lightbulb />
         </div>
@@ -86,7 +86,7 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
     },
     containsInlineContent: true,
     render: ({ block }) => (
-      <div className="my-4 px-4 py-8 rounded-md shadow-lg flex space-x-8 bg-rose-100">
+      <div className="my-4 px-4 py-8 rounded-md shadow-md flex space-x-8 bg-rose-100">
         <div className="flex-none flex justify-center items-center rounded-full w-10 h-10  bg-rose-500 text-white ">
           <AlertTriangle />
         </div>

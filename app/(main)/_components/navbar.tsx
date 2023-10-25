@@ -12,8 +12,8 @@ import { Publish } from "./publish";
 
 
 interface NavbarProps {
-    isCollapsed: boolean;
-    onResetWidth: () => void;
+    isCollapsed?: boolean;
+    onResetWidth?: () => void;
 }
 
 const Navbar = ({
